@@ -1,0 +1,38 @@
+plugins {
+    id 'java'
+}
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    implementation 'org.apache.httpcomponents:httpclient:4.5.13'
+    implementation 'commons-codec:commons-codec:1.15'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.12.1'
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
+
+task runExpressionRuleTests(type: JavaExec) {
+    main = 'com.example.ExpressionRuleTestRunner'
+    classpath = sourceSets.main.runtimeClasspath
+    systemProperties = [
+        'appianUserName'        : project.findProperty('appianUserName') ?: System.getenv('APPIAN_USERNAME'),
+        'appianPasswordEncoded' : project.findProperty('appianPasswordEncoded') ?: System.getenv('APPIAN_PASSWORD_ENCODED'),
+        'siteUrl'               : project.findProperty('siteUrl') ?: System.getenv('SITE_URL')
+    ]
+    doFirst {
+        println 'Running Expression Rule Tests...'
+    }
+    doLast {
+        println 'Expression Rule Tests Completed'
+    }
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '6.0'
+}
