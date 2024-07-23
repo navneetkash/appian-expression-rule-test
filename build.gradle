@@ -33,6 +33,6 @@ task runExpressionRuleTests(type: JavaExec) {
     }
 }
 
-task wrapper(type: Wrapper) {
+task wrappers(type: Wrapper) {
     gradleVersion = '6.0'
 }
