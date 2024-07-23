@@ -3,7 +3,7 @@ plugins {
 }
 
 repositories {
-    jcenter()
+    mavenCentral()
 }
 
 dependencies {
@@ -17,9 +17,9 @@ java {
     targetCompatibility = JavaVersion.VERSION_17
 }
 
-task runExpressionRuleTests(type: JavaExec) {
-    main = 'com.example.ExpressionRuleTestRunner'
-    classpath = sourceSets.main.runtimeClasspath
+tasks.register('runExpressionRuleTests', JavaExec) {
+    mainClass.set('com.example.ExpressionRuleTestRunner')
+    classpath = sourceSets.main.get().runtimeClasspath
     systemProperties = [
         'appianUserName'        : project.findProperty('appianUserName') ?: System.getenv('APPIAN_USERNAME'),
         'appianPasswordEncoded' : project.findProperty('appianPasswordEncoded') ?: System.getenv('APPIAN_PASSWORD_ENCODED'),
@@ -33,6 +33,6 @@ task runExpressionRuleTests(type: JavaExec) {
     }
 }
 
-task wrappers(type: Wrapper) {
-    gradleVersion = '6.0'
+tasks.register('wrappers', Wrapper) {
+    gradleVersion = '9.0'
 }
