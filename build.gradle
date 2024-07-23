@@ -33,6 +33,7 @@ tasks.register('runExpressionRuleTests', JavaExec) {
     }
 }
 
-tasks.register('wrappers', Wrapper) {
+wrapper {
     gradleVersion = '9.0'
+    distributionUrl = distributionUrl.replace("bin", "all")
 }
