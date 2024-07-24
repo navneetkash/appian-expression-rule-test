@@ -18,7 +18,7 @@ java {
 }
 
 tasks.register('runExpressionRuleTests', JavaExec) {
-    mainClass.set('com.example.ExpressionRuleTestRunner')
+    mainClass.set('org.example.ExpressionRuleTestRunner')
     classpath = sourceSets.main.get().runtimeClasspath
     systemProperties = [
         'appianUserName'        : project.findProperty('appianUserName') ?: System.getenv('APPIAN_USERNAME'),
